@@ -61,6 +61,7 @@
          
          echo -e "\e[1;4;92mSHORTCUTS\e[0m\n";
          
+         echo -e "\e[38;5;36ms2a\e[0m = ${BASH_ALIASES[s2a]}";
          echo -e "\e[38;5;36ms2s\e[0m = ${BASH_ALIASES[s2s]}";
          echo -e "\e[38;5;36ms2r\e[0m = ${BASH_ALIASES[s2r]}";
          echo -e "\e[38;5;36mlsg\e[0m = ${BASH_ALIASES[lsg]}";
