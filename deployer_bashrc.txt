@@ -1,0 +1,68 @@
+# stop here if this is not an interactive shell (e.g. ssh <hostname> ls)
+[[ $- == *i* ]] || return
+
+###############################
+# Custom terminal prompt colors
+###############################
+
+green=$(tput setaf 2);
+cyan=$(tput setaf 6);
+yellow=$(tput setaf 3);
+white=$(tput setaf 7);
+bold=$(tput bold);
+reset=$(tput sgr0);
+
+PS1="\[${bold}\]\n";
+PS1+="\[${green}\]\u";   # Username
+PS1+="\[${white}\] @ ";
+PS1+="\[${cyan}\]\H";    # Hostname
+PS1+="\[${white}\] in ";
+PS1+="\[${yellow}\]\w ";  # Working directory
+PS1+="\n";
+PS1+="\[${green}\](づ｡◕‿‿◕｡)づ\$ \[${reset}\]"; # `$` (and reset color)
+export PS1;
+
+
+####################
+# Custom CLI Aliases
+####################
+
+alias ebrc="vim /home/splunk/.bashrc"
+alias sbrc="source /home/splunk/.bashrc"
+alias his="history"
+alias lsg="ls -lah | grep -i"
+alias e="exit"
+
+alias c2e="cd /opt/splunk/etc"
+alias c2ea="cd /opt/splunk/etc/apps"
+alias c2s="cd /opt/splunk/etc/system/local"
+alias scli="/opt/splunk/bin/splunk"
+alias c2sa="cd /opt/splunk/etc/shcluster/apps"
+alias c2s="cd /opt/splunk/etc/system/local"
+alias eic="vim /opt/splunk/etc/shcluster/apps/org_all_indexes/local/indexes.conf"
+alias ashb="/opt/splunk/bin/splunk apply shcluster-bundle -target 'https://<ip/hostname>:8089' -preserve-lookups true"
+
+#########################
+# Custom Welcome Message 
+#########################
+
+echo -e "\e[38;5;11m";
+echo '                               __           __                     ';
+echo '  _________  ________     ____/ /__  ____  / /___  __  _____  _____';
+echo ' / ___/ __ \/ ___/ _ \   / __  / _ \/ __ \/ / __ \/ / / / _ \/ ___/';
+echo '/ /__/ /_/ / /  /  __/  / /_/ /  __/ /_/ / / /_/ / /_/ /  __/ /    ';
+echo '\___/\____/_/   \___/   \__,_/\___/ .___/_/\____/\__, /\___/_/     ';
+echo '                                 /_/            /____/             ';
+echo -e "\e[0m";
+
+echo -e "\e[1;4;92mSHORTCUTS\e[0m\n";         
+
+echo -e "\e[38;5;11mc2e\e[0m  = ${BASH_ALIASES[c2e]}";
+echo -e "\e[38;5;11mc2ea\e[0m = ${BASH_ALIASES[c2ea]}";
+echo -e "\e[38;5;11mc2sa\e[0m = ${BASH_ALIASES[c2sa]}";
+echo -e "\e[38;5;11mc2s\e[0m  = ${BASH_ALIASES[c2s]}";
+echo -e "\e[38;5;11meic\e[0m  = ${BASH_ALIASES[eic]}";
+echo -e "\e[38;5;11mscli\e[0m = ${BASH_ALIASES[scli]}";
+echo -e "\e[38;5;11mashb\e[0m = ${BASH_ALIASES[ashb]}";
+echo -e "\e[38;5;11mlsg\e[0m  = ${BASH_ALIASES[lsg]}";
+echo -e "\e[38;5;11me\e[0m    = ${BASH_ALIASES[e]}";
