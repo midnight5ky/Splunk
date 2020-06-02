@@ -1,4 +1,6 @@
 ---
+# This playbook updates your user's .bashrc file for customized terminal prompt.
+
 - hosts: all_splunk
   gather_facts: no
   become: yes
