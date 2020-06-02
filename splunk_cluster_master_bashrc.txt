@@ -1,0 +1,90 @@
+# stop here if this is not an interactive shell (e.g. ssh <hostname> 
+[[ $- == *i* ]] || return
+
+################################
+# Custom terminal prompt colors 
+################################
+
+green=$(tput setaf 2);
+cyan=$(tput setaf 6);
+yellow=$(tput setaf 3);
+white=$(tput setaf 7);
+bold=$(tput bold);
+reset=$(tput sgr0);
+PS1="\[${bold}\]\n";
+PS1+="\[${green}\]\u";   # Username
+PS1+="\[${white}\] @ ";
+PS1+="\[${cyan}\]\H";    # Hostname
+PS1+="\[${white}\] in ";
+PS1+="\[${yellow}\]\w ";  # Working directory
+PS1+="\n";
+PS1+="\[${green}\](づ｡◕‿‿◕｡)づ\$ \[${reset}\]"; # `$` (and reset colo
+export PS1;
+
+#####################
+# Custom CLI Aliases 
+#####################
+alias ebrc="vim /home/splunk/.bashrc"
+alias sbrc="source /home/splunk/.bashrc"
+alias his="history"
+alias c2e="cd /opt/splunk/etc"
+alias c2ea="cd /opt/splunk/etc/apps"
+alias c2ma="cd /opt/splunk/etc/master-apps"
+alias c2s="cd /opt/splunk/etc/system/local"
+alias scli="/opt/splunk/bin/splunk"
+# Run splunk-optimize; include directory after the command
+alias rso="/opt/splunk/bin/splunk-optimize -d"
+# maintenance-mode commands
+alias ssmm="/opt/splunk/bin/splunk show maintenance-mode --answer-yes"
+alias semm="/opt/splunk/bin/splunk enable maintenance-mode --answer-yes"
+alias sdmm="/opt/splunk/bin/splunk disable maintenance-mode --answer-yes"
+alias sscb="/opt/splunk/bin/splunk show cluster-bundle-status"
+alias sscs="/opt/splunk/bin/splunk show cluster-status"
+alias sacb="/opt/splunk/bin/splunk apply cluster-bundle"
+alias ssrs="/opt/splunk/bin/splunk rolling-restart cluster-peers"
+alias skdg="/opt/splunk/bin/splunk diag --enable=rest"
+alias sleb="/opt/splunk/bin/splunk list excess-buckets"
+alias sreb="/opt/splunk/bin/splunk remove excess-buckets"
+alias ssdk="/opt/splunk/bin/splunk show-decrypted --value"
+alias eic="vim /opt/splunk/etc/master-apps/org_all_indexes/local/indexes.conf"
+alias ssg="cat /opt/splunk/etc/instance.cfg"
+alias lsg="ls -lah | grep -i"
+alias hg="history | grep -i"
+alias e="exit"
+
+#########################
+# Custom Welcome Message 
+#########################
+
+echo -e "\e[38;5;198m";
+echo '               __            __                   ';
+echo '   _________  / /_  ______  / /__   _____________ ';
+echo '  / ___/ __ \/ / / / / __ \/ //_/  / ___/ __ \__ \';
+echo ' (__  ) /_/ / / /_/ / / / / ,<    / /__/ / / / / /';
+echo '/____/ .___/_/\__,_/_/ /_/_/|_|   \___/_/ /_/ /_/ ';
+echo '    /_/                                           ';
+echo -e "\e[0m";
+
+echo -e "\e[1;4;92mSHORTCUTS\e[0m\n";
+
+echo -e "\e[38;5;198mc2e\e[0m  = ${BASH_ALIASES[c2e]}";
+echo -e "\e[38;5;198mc2ea\e[0m = ${BASH_ALIASES[c2ea]}";
+echo -e "\e[38;5;198mc2ma\e[0m = ${BASH_ALIASES[c2ma]}";
+echo -e "\e[38;5;198mc2s\e[0m  = ${BASH_ALIASES[c2s]}";
+echo -e "\e[38;5;198mscli\e[0m = ${BASH_ALIASES[scli]}";
+echo -e "\e[38;5;198mssmm\e[0m = ${BASH_ALIASES[ssmm]}";
+echo -e "\e[38;5;198msemm\e[0m = ${BASH_ALIASES[semm]}";
+echo -e "\e[38;5;198msdmm\e[0m = ${BASH_ALIASES[sdmm]}";
+echo -e "\e[38;5;198msscb\e[0m = ${BASH_ALIASES[sscb]}";
+echo -e "\e[38;5;198msscs\e[0m = ${BASH_ALIASES[sscs]}";
+echo -e "\e[38;5;198msacb\e[0m = ${BASH_ALIASES[sacb]}";
+echo -e "\e[38;5;198mssrs\e[0m = ${BASH_ALIASES[ssrs]}";
+echo -e "\e[38;5;198mskdg\e[0m = ${BASH_ALIASES[skdg]}";
+echo -e "\e[38;5;198msleb\e[0m = ${BASH_ALIASES[sleb]}";
+echo -e "\e[38;5;198msreb\e[0m = ${BASH_ALIASES[sreb]}";
+echo -e "\e[38;5;198mssdk\e[0m = ${BASH_ALIASES[ssdk]}";
+echo -e "\e[38;5;198meic\e[0m  = ${BASH_ALIASES[eic]}";
+echo -e "\e[38;5;198mssg\e[0m  = ${BASH_ALIASES[ssg]}";
+echo -e "\e[38;5;198mlsg\e[0m  = ${BASH_ALIASES[lsg]}";
+echo -e "\e[38;5;198mhg\e[0m   = ${BASH_ALIASES[hg]}";
+echo -e "\e[38;5;198me\e[0m    = ${BASH_ALIASES[e]}";
