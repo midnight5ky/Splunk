@@ -17,6 +17,7 @@ I added Ansible playbooks that I use in my current environment as an example in 
 
 # Example Ansible Inventory List
 [all_splunk:children]
+
 deployment_server
 cluster_master
 all_indexers
