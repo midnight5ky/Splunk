@@ -1,0 +1,113 @@
+---
+- hosts: all_indexers
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Checking if /home/splunk exist
+      file:
+        path: /home/splunk/
+        state: directory
+        owner: splunk
+        group: splunk
+
+    - name: Checking if .bashrc file exist
+      file:
+        path: /home/splunk/.bashrc
+        state: touch
+        owner: splunk
+        group: splunk
+
+    - name: Creating .bash_profile file in /opt/splunk
+      file:
+        path: /opt/splunk/.bash_profile
+        state: touch
+        owner: splunk
+        group: splunk
+
+    - name:  Adding "source /opt/splunk/.bashrc" line to .bash_profile
+      lineinfile:
+        path: /opt/splunk/.bash_profile
+        state: present
+        line: source /home/splunk/.bashrc
+
+    - name: Now updating .bashrc file for AWS Indexers
+      blockinfile:
+        path: /home/splunk/.bashrc
+        marker_begin: "BEGIN CUSTOM BASHRC"
+        marker_end: "END CUSTOM BASHRC"
+        block: |
+
+         # DO NOT MODIFY ANYTHING BETWEEN THE ANSIBLE
+         # MANAGED BLOCK - IT WILL GET OVERWRITTEN
+         # WHEN UPDATES ARE PUSHED VIA ANSIBLE!
+
+         # stop here if this is not an interactive shell (e.g. ssh <hostname> ls)
+         [[ $- == *i* ]] || return
+
+         ################################
+         # Custom terminal prompt colors
+         ################################
+
+         green=$(tput setaf 2);
+         cyan=$(tput setaf 6);
+         yellow=$(tput setaf 3);
+         white=$(tput setaf 7);
+         bold=$(tput bold);
+         reset=$(tput sgr0);
+
+         PS1="\[${bold}\]\n";
+         PS1+="\[${green}\]\u";   # Username
+         PS1+="\[${white}\] @ ";
+         PS1+="\[${cyan}\]\H";    # Hostname
+         PS1+="\[${white}\] in ";
+         PS1+="\[${yellow}\]\w ";  # Working directory
+         PS1+="\n";
+         PS1+="\[${green}\](づ｡◕‿‿◕｡)づ\$ \[${reset}\]"; # `$` (and reset color)
+         export PS1;
+
+
+         #####################
+         # Custom CLI Aliases
+         #####################
+
+         alias ebrc="vim /home/splunk/.bashrc"
+         alias sbrc="source /home/splunk/.bashrc"
+         alias his="history"
+         alias hg="history | grep -i"
+
+         alias c2e="cd /opt/splunk/etc"
+         alias c2sl="cd /opt/splunk/etc/slave-apps"
+         alias c2s="cd /opt/splunk/etc/system/local"
+         alias scli="/opt/splunk/bin/splunk"
+         alias sssp="/opt/splunk/bin/splunk show splunkd-port"
+         alias sssn="/opt/splunk/bin/splunk show servername"
+         alias ssdh="/opt/splunk/bin/splunk show default-hostname"
+         alias ssg="cat /opt/splunk/etc/instance.cfg"
+
+         alias lsg="ls -lah | grep -i"
+         alias e="exit"
+
+         echo -e "\e[38;5;198m";
+         echo '               __            __      _     __    ';
+         echo '   _________  / /_  ______  / /__   (_)___/ /_ __';
+         echo '  / ___/ __ \/ / / / / __ \/ //_/  / / __  / |/_/';
+         echo ' (__  ) /_/ / / /_/ / / / / ,<    / / /_/ />  <  ';
+         echo '/____/ .___/_/\__,_/_/ /_/_/|_|  /_/\__,_/_/|_|  ';
+         echo '    /_/                                          ';
+         echo -e "\e[0m\n";
+
+         echo -e "\e[1;4;92mSHORTCUTS\e[0m";
+
+         echo -e "\e[38;5;198mc2e\e[0m  = ${BASH_ALIASES[c2e]}";
+         echo -e "\e[38;5;198mc2sl\e[0m = ${BASH_ALIASES[c2sl]}";
+         echo -e "\e[38;5;198mc2s\e[0m  = ${BASH_ALIASES[c2s]}";
+
+         echo -e "\e[38;5;198mscli\e[0m = ${BASH_ALIASES[scli]}";
+         echo -e "\e[38;5;198msssp\e[0m = ${BASH_ALIASES[sssp]}";
+         echo -e "\e[38;5;198msssn\e[0m = ${BASH_ALIASES[sssn]}";
+         echo -e "\e[38;5;198mssdh\e[0m = ${BASH_ALIASES[ssdh]}";
+         echo -e "\e[38;5;198mssg\e[0m  = ${BASH_ALIASES[ssg]}";
+
+         echo -e "\e[38;5;198mlsg\e[0m  = ${BASH_ALIASES[lsg]}";
+         echo -e "\e[38;5;198mhg\e[0m   = ${BASH_ALIASES[hg]}";
+         echo -e "\e[38;5;198me\e[0m    = ${BASH_ALIASES[e]}";
