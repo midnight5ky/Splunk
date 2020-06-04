@@ -1,0 +1,23 @@
+# Example Ansible Inventory List
+
+[all_splunk:children]
+deployment_server
+cluster_master
+all_indexers
+deployer
+all_search_heads
+
+[deployment_server]
+deploymentserver.example.com
+
+[cluster_master]
+clustermaster.example.com
+
+[all_indexers]
+indexer[01:30].example.com
+
+[deployer]
+deployer.example.com
+
+[all_search_heads]
+searchhead[01:03].example.com
