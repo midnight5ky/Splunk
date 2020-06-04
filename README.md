@@ -12,32 +12,8 @@ I personally customize specific .bashrc files depending on the Splunk server rol
 So when you "sudo su - splunk", it'll contain and display specific aliases and welcome messages. 
 
 You can modify all the Splunk's .bashrc file with Ansible. 
-Just add all the appropriate hosts groups and names in your inventory file, example below. 
+Just add all the appropriate hosts groups and names in your inventory file, check my "example_inventory_file". 
 I added Ansible playbooks that I use in my current environment as an example in the master branch. 
-
-# Example Ansible Inventory List
-[all_splunk:children]
-
-deployment_server
-cluster_master
-all_indexers
-deployer
-all_search_heads
-
-[deployment_server]
-deploymentserver.example.com
-
-[cluster_master]
-clustermaster.example.com
-
-[all_indexers]
-indexer[01:30].example.com
-
-[deployer]
-deployer.example.com
-
-[all_search_heads]
-searchhead[01:03].example.com
 
 
 # References
