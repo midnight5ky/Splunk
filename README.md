@@ -15,11 +15,19 @@ You can modify all the Splunk's .bashrc file with Ansible.
 Just add all the appropriate hosts groups and names in your inventory file, example below. 
 I added Ansible playbooks that I use in my current environment as an example in the master branch. 
 
+#################################
+# Example Ansible Inventory List
+#################################
+
 [all_splunk:children]
+deployment_server
 cluster_master
 all_indexers
 deployer
 all_search_heads
+
+[deployment_server]
+deploymentserver.example.com
 
 [cluster_master]
 clustermaster.example.com
@@ -32,3 +40,17 @@ deployer.example.com
 
 [all_search_heads]
 searchhead[01:03].example.com
+
+#################################
+# End Example Inventory List
+#################################
+
+Check my "all_indexer_bashrc.yml" playbook that customize the .bashrc file for all indexers. 
+Rinse and repeat for search head cluster members, heavy forwarders, and so on. 
+
+I use this site for the Splunk server titles:
+http://patorjk.com/software/taag/#p=display&c=echo&f=Slant&t=splunk%0A%0A
+
+For color formatting, use this site:
+
+
