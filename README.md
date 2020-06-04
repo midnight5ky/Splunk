@@ -22,7 +22,7 @@ Credit to Corey Schafer for teaching everyone how to customize their .bashrc fil
 https://www.youtube.com/user/schafer5/playlists
 
 
-Check my "all_indexer_bashrc.yml" playbook that customize the .bashrc file for all indexers. 
+Check my "all_indexer_bashrc.yml" playbook that customizes the .bashrc file for all indexers. 
 Rinse and repeat for search head cluster members, heavy forwarders, and so on. 
 
 I use this site for the Splunk server titles:
