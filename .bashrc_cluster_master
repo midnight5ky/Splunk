@@ -1,0 +1,114 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# User specific environment
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+# stop here if this is not an interactive shell (e.g. ssh <hostname> ls)
+[[ $- == *i* ]] || return
+# Adds date/time to history command
+export HISTTIMEFORMAT="%m/%d/%y %T "
+
+################################
+# Custom terminal prompt colors 
+################################
+green=$(tput setaf 2);
+cyan=$(tput setaf 6);
+yellow=$(tput setaf 3);
+white=$(tput setaf 7);
+bold=$(tput bold);
+reset=$(tput sgr0);
+PS1="\[${bold}\]\n";
+PS1+="\[${green}\]\u";   # Username
+PS1+="\[${white}\] @ ";
+PS1+="\[${cyan}\]\H";    # Hostname
+PS1+="\[${white}\] in ";
+PS1+="\[${yellow}\]\w ";  # Working directory
+PS1+="\n";
+PS1+="\[${green}\](づ｡◕‿‿◕｡)づ\$ \[${reset}\]"; # `$` (and reset color)
+export PS1;
+
+#####################
+# Custom CLI Aliases 
+#####################
+alias splunk="/opt/splunk/bin/splunk"
+alias ebrc="vim /home/splunk/.bashrc"
+alias sbrc="source /home/splunk/.bashrc"
+alias his="history"
+alias c2sh="cd /home/splunk"
+alias c2e="cd /opt/splunk/etc"
+alias c2ea="cd /opt/splunk/etc/apps"
+alias c2ma="cd /opt/splunk/etc/master-apps"
+alias c2s="cd /opt/splunk/etc/system/local"
+alias scli="${BASH_ALIASES[splunk]}"
+# Run splunk-optimize; include directory after the command
+alias rso="splunk-optimize -d"
+# maintenance-mode commands
+alias ssmm="splunk show maintenance-mode --answer-yes"
+alias semm="splunk enable maintenance-mode --answer-yes"
+alias sdmm="splunk disable maintenance-mode --answer-yes"
+alias sscb="splunk show cluster-bundle-status"
+alias sscs="splunk show cluster-status"
+alias sacb="splunk apply cluster-bundle"
+alias ssrs="splunk rolling-restart cluster-peers"
+alias ssdr="splunk rebalance cluster-data -action start -searchable false"
+alias sdrs="splunk rebalance cluster-data -action status"
+alias sdr="splunk rebalance cluster-data -action stop"
+alias skdg="splunk diag --enable=rest"
+alias sleb="splunk list excess-buckets"
+alias sreb="splunk remove excess-buckets"
+alias ssdk="splunk show-decrypted --value"
+alias ssg="cat /opt/splunk/etc/instance.cfg"
+alias lsg="ls -lah | grep -i"
+alias hsg="history | grep -i"
+alias e="exit"
+
+#########################
+# Custom Welcome Message 
+#########################
+echo -e "\e[38;5;198m";
+echo '               __            __                   ';
+echo '   _________  / /_  ______  / /__   _____________ ';
+echo '  / ___/ __ \/ / / / / __ \/ //_/  / ___/ __ \__ \';
+echo ' (__  ) /_/ / / /_/ / / / / ,<    / /__/ / / / / /';
+echo '/____/ .___/_/\__,_/_/ /_/_/|_|   \___/_/ /_/ /_/ ';
+echo '    /_/                                           ';
+echo -e "\e[0m";
+echo -e "\e[1;4;92mSHORTCUTS\e[0m \n";
+echo -e "\e[38;5;198mc2sh\e[0m = ${BASH_ALIASES[c2sh]}";
+echo -e "\e[38;5;198mc2e\e[0m  = ${BASH_ALIASES[c2e]}";
+echo -e "\e[38;5;198mc2ea\e[0m = ${BASH_ALIASES[c2ea]}";
+echo -e "\e[38;5;198mc2ma\e[0m = ${BASH_ALIASES[c2ma]}";
+echo -e "\e[38;5;198mc2s\e[0m  = ${BASH_ALIASES[c2s]}";
+echo "";
+echo -e "\e[38;5;198mscli\e[0m = ${BASH_ALIASES[scli]}";
+echo -e "\e[38;5;198mssmm\e[0m = ${BASH_ALIASES[ssmm]}";
+echo -e "\e[38;5;198msemm\e[0m = ${BASH_ALIASES[semm]}";
+echo -e "\e[38;5;198msdmm\e[0m = ${BASH_ALIASES[sdmm]}";
+echo -e "\e[38;5;198mssdr\e[0m = ${BASH_ALIASES[ssdr]}";
+echo -e "\e[38;5;198msdrs\e[0m = ${BASH_ALIASES[sdrs]}";
+echo -e "\e[38;5;198msdr\e[0m  = ${BASH_ALIASES[sdr]}";
+echo -e "\e[38;5;198msscb\e[0m = ${BASH_ALIASES[sscb]}";
+echo -e "\e[38;5;198msscs\e[0m = ${BASH_ALIASES[sscs]}";
+echo -e "\e[38;5;198msacb\e[0m = ${BASH_ALIASES[sacb]}";
+echo -e "\e[38;5;198mssrs\e[0m = ${BASH_ALIASES[ssrs]}";
+echo -e "\e[38;5;198mskdg\e[0m = ${BASH_ALIASES[skdg]}";
+echo -e "\e[38;5;198msleb\e[0m = ${BASH_ALIASES[sleb]}";
+echo -e "\e[38;5;198msreb\e[0m = ${BASH_ALIASES[sreb]}";
+echo -e "\e[38;5;198mssdk\e[0m = ${BASH_ALIASES[ssdk]}";
+echo "";
+echo -e "\e[38;5;198mssg\e[0m  = ${BASH_ALIASES[ssg]}";
+echo -e "\e[38;5;198mlsg\e[0m  = ${BASH_ALIASES[lsg]}";
+echo -e "\e[38;5;198mhsg\e[0m  = ${BASH_ALIASES[hsg]}";
+echo -e "\e[38;5;198me\e[0m    = ${BASH_ALIASES[e]}";
+
