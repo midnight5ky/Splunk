@@ -3,10 +3,12 @@ My personal .bashrc settings for Splunk clustered environment
 
 Usually the .bash files are located in each user's home directory - /home/user/.bashrc
 
+Depending on how you installed Splunk or created a Splunk user, the .bashrc file is usually in /opt/splunk/ or /home/splunk/
+
 You may need add this line to the .bash_profile file so it'll use the code in the .bashrc file:
 Add: "source ~/.bashrc"
 
-Just copy and paste the code from the bashrc.txt files to your user's .bashrc file. 
+Just copy and paste the code from the .bashrc files to your user's .bashrc file. 
 
 I personally customize specific .bashrc files depending on the Splunk server roles. 
 So when you "sudo su - splunk", it'll contain and display specific aliases and welcome messages. 
