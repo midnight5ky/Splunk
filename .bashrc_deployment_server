@@ -1,0 +1,120 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+
+# stop here if this is not an interactive shell (e.g. ssh <hostname> ls)
+# Prevents errors with scp command
+[[ $- == *i* ]] || return
+
+# Adds date/time to history command
+export HISTTIMEFORMAT="%m/%d/%y %T "
+
+##################
+# Custome aliases 
+##################
+
+alias splunk="/opt/splunk/bin/splunk"
+
+# Edit .bashrc file
+alias ebrc="vi ~/.bashrc"
+# Update running .bashrc
+alias sbrc="source ~/.bashrc"
+
+# Splunk CMD
+alias scli="${BASH_ALIASES[splunk]}"
+alias sda="splunk display app"
+alias rrds="splunk reload deploy-server -timeout 200"
+
+alias c2sh="cd /home/splunk"
+alias c2e="cd /opt/splunk/etc"
+alias c2ea="cd /opt/splunk/etc/apps"
+alias c2s="cd /opt/splunk/etc/system/local"
+alias c2da="cd /opt/splunk/etc/deployment-apps"
+
+# Edit serverclass.conf file
+alias escc="vim /opt/splunk/etc/system/local/serverclass.conf"
+
+# Display pass4SymmKey in clear text
+alias ssdk="splunk show-decrypted --value"
+
+# shows guid
+alias ssg="cat /opt/splunk/etc/instance.cfg"
+
+alias l='ls -lahi'
+
+# List directory and grep
+alias lsg="ls -lah | grep -i"
+alias hg='history | grep -i'
+
+alias e="exit"
+
+#########################
+# Custom Welcome Message 
+#########################
+
+
+echo -e "\e[38;5;4m";
+echo '                 ///,        ////';
+echo '                 \  /,      /  >.';
+echo '                  \  /,   _/  /.';
+echo '                   \_  /_/   /.';
+echo '                    \__/_   <';
+echo '                    /<<< \_\_\    America!';
+echo '                   /,)^>>_._ \';
+echo '                   (/   \\ /\\\';
+echo '                        // //```';
+echo '          __      __   // //  __       __';
+echo '   ____  / /___  / /_ ((`((  / /  ____/ /____';
+echo '  / __ \/ / __ \/ __ \/ __ \/ /  / __  / ___/';
+echo ' / /_/ / / /_/ / /_/ / /_/ / /  / /_/ (__  )';
+echo ' \__, /_/\____/_.___/\__,_/_/   \__,_/____/';
+echo '/____/';
+echo -e "\e[0m"
+
+
+echo -e "\e[1;4;92mSHORTCUTS\e[0m \n";
+
+echo -e "\e[38;5;4mscli\e[0m = ${BASH_ALIASES[scli]}";
+echo -e "\e[38;5;4msda\e[0m  = ${BASH_ALIASES[sda]}";
+echo -e "\e[38;5;4mrrds\e[0m = ${BASH_ALIASES[rrds]}";
+echo -e "\e[38;5;4mssdk\e[0m = ${BASH_ALIASES[ssdk]}";
+echo "";
+echo -e "\e[38;5;4mc2sh\e[0m = ${BASH_ALIASES[c2sh]}";
+echo -e "\e[38;5;4mc2e\e[0m  = ${BASH_ALIASES[c2e]}";
+echo -e "\e[38;5;4mc2ea\e[0m = ${BASH_ALIASES[c2ea]}";
+echo -e "\e[38;5;4mc2s\e[0m  = ${BASH_ALIASES[c2s]}";
+echo -e "\e[38;5;4mc2da\e[0m = ${BASH_ALIASES[c2da]}";
+echo "";
+echo -e "\e[38;5;4mssg\e[0m  = ${BASH_ALIASES[ssg]}";
+
+################################
+# Custom terminal prompt colors 
+################################
+
+# Assigns color/font description to tput values
+
+black=$(tput setaf 0);
+red=$(tput setaf 1);
+green=$(tput setaf 2);
+yellow=$(tput setaf 3);
+blue=$(tput setaf 4);
+magenta=$(tput setaf 5);
+cyan=$(tput setaf 6);
+white=$(tput setaf 7);
+bold=$(tput bold);
+reset=$(tput sgr0);
+
+
+PS1="\[${bold}\]\n";
+PS1+="\[${green}\]\u";   # Username
+PS1+="\[${white}\] @ ";
+PS1+="\[${cyan}\]\H";    # Hostname
+PS1+="\[${white}\] in ";
+PS1+="\[${yellow}\]\w";  # Working directory
+PS1+="\n";
+PS1+="\[${green}\](づ｡◕‿‿◕｡)づ\$ \[${reset}\]"; # `$` (and reset color)
+export PS1;
