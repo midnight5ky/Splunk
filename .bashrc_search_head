@@ -1,0 +1,92 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# stop here if this is not an interactive shell (e.g. ssh <hostname> ls)
+[[ $- == *i* ]] || return
+# Adds date/time to history command
+export HISTTIMEFORMAT="%m/%d/%y %T "
+
+###############################
+# Custom terminal prompt colors
+###############################
+green=$(tput setaf 2);
+cyan=$(tput setaf 6);
+yellow=$(tput setaf 3);
+white=$(tput setaf 7);
+bold=$(tput bold);
+reset=$(tput sgr0);
+PS1="\[${bold}\]\n";
+PS1+="\[${green}\]\u";   # Username
+PS1+="\[${white}\] @ ";
+PS1+="\[${cyan}\]\H";    # Hostname
+PS1+="\[${white}\] in ";
+PS1+="\[${yellow}\]\w ";  # Working directory
+PS1+="\n";
+PS1+="\[${green}\](づ｡◕‿‿◕｡)づ\$ \[${reset}\]"; # `$` (and reset color)
+export PS1;
+
+#####################
+# Custom CLI Aliases 
+#####################
+alias splunk="/opt/splunk/bin/splunk"
+alias ebrc="vim /home/splunk/.bashrc"
+alias sbrc="source /home/splunk/.bashrc"
+alias his="history"
+alias c2sh="cd /home/splunk"
+alias c2e="cd /opt/splunk/etc"
+alias c2ea="cd /opt/splunk/etc/apps"
+alias c2s="cd /opt/splunk/etc/system/local"
+alias scli="${BASH_ALIASES[splunk]}"
+alias srrs="splunk rolling-restart shcluster-members"
+alias drrs="splunk rolling-restart shcluster-members -status 1"
+alias slsc="splunk list shcluster-config"
+alias slsm="splunk list shcluster-members"
+alias slci="splunk list shcluster-captain-info"
+alias slsa="splunk list shcluster-artifacts"
+alias slsj="splunk list shcluster-scheduler-jobs"
+alias slmi="splunk list shcluster-member-info"
+alias slcs="splunk list shcluster-configuration-set"
+alias slma="splunk list shcluster-member-artifacts"
+alias ssg="cat /opt/splunk/etc/instance.cfg"
+alias lsg="ls -lah | grep -i"
+alias hg="history | grep -i"
+alias e="exit" 
+
+#########################
+# Custom Welcome Message 
+#########################
+
+echo -e "\e[38;5;84m";
+echo '               __            __           __  ';
+echo '   _________  / /_  ______  / /__   _____/ /_ ';
+echo '  / ___/ __ \/ / / / / __ \/ //_/  / ___/ __ \';
+echo ' (__  ) /_/ / / /_/ / / / / ,<    (__  ) / / /';
+echo '/____/ .___/_/\__,_/_/ /_/_/|_|  /____/_/ /_/ ';
+echo '    /_/                                       ';
+echo -e "\e[0m";         
+echo -e "\e[1;4;92mSHORTCUTS\e[0m \n";
+echo -e "\e[38;5;84mc2sh\e[0m = ${BASH_ALIASES[c2sh]}";
+echo -e "\e[38;5;84mc2e\e[0m  = ${BASH_ALIASES[c2e]}";
+echo -e "\e[38;5;84mc2ea\e[0m = ${BASH_ALIASES[c2ea]}";
+echo -e "\e[38;5;84mc2s\e[0m  = ${BASH_ALIASES[c2s]}";
+echo "";
+echo -e "\e[38;5;84mscli\e[0m = ${BASH_ALIASES[scli]}";
+echo -e "\e[38;5;84mslsc\e[0m = ${BASH_ALIASES[slsc]}";
+echo -e "\e[38;5;84mslsm\e[0m = ${BASH_ALIASES[slsm]}";
+echo -e "\e[38;5;84mslci\e[0m = ${BASH_ALIASES[slci]}";
+echo -e "\e[38;5;84mslsa\e[0m = ${BASH_ALIASES[slsa]}";
+echo -e "\e[38;5;84mslsj\e[0m = ${BASH_ALIASES[slsj]}";
+echo -e "\e[38;5;84mslmi\e[0m = ${BASH_ALIASES[slmi]}";
+echo -e "\e[38;5;84mslcs\e[0m = ${BASH_ALIASES[slcs]}";
+echo -e "\e[38;5;84mslma\e[0m = ${BASH_ALIASES[slma]}";
+echo -e "\e[38;5;84msrrs\e[0m = ${BASH_ALIASES[srrs]}";
+echo -e "\e[38;5;84mdrrs\e[0m = ${BASH_ALIASES[drrs]}";
+echo "";
+echo -e "\e[38;5;84mssg\e[0m  = ${BASH_ALIASES[ssg]}";
+echo -e "\e[38;5;84mlsg\e[0m  = ${BASH_ALIASES[lsg]}";
+echo -e "\e[38;5;84mhg\e[0m   = ${BASH_ALIASES[hg]}";
+echo -e "\e[38;5;84me\e[0m    = ${BASH_ALIASES[e]}";
