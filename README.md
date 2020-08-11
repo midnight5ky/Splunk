@@ -17,7 +17,7 @@ You can modify all the Splunk's .bashrc file with Ansible.
 Just add all the appropriate hosts groups and names in your inventory file, check my "example_inventory_file". 
 I added Ansible playbooks that I use in my current environment as an example in the master branch. 
 
-Check my "all_indexer_bashrc.yml" playbook that customizes the .bashrc file for all indexers. 
+Check my "example_playbook.yml" playbook that customizes the .bashrc file for all indexers. 
 Rinse and repeat for search head cluster members, heavy forwarders, and so on. 
 
 # References
